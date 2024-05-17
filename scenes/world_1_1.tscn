@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dy5xgvjdk1gt2"]
+[gd_scene load_steps=16 format=3 uid="uid://dy5xgvjdk1gt2"]
 
 [ext_resource type="PackedScene" uid="uid://cnymdajj1vsqm" path="res://objects/platform.tscn" id="1_hd6tc"]
 [ext_resource type="PackedScene" uid="uid://rjh4ifidqrfp" path="res://objects/platform_medium.tscn" id="2_4ri2q"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ch4octvkamohp" path="res://objects/object_move_and_ferry.tscn" id="7_kdj2w"]
 [ext_resource type="PackedScene" uid="uid://cuw3vlheniadh" path="res://objects/object_move_and_loop.tscn" id="7_waf8w"]
 [ext_resource type="PackedScene" uid="uid://closbnks0qacq" path="res://objects/object_move_and_stop.tscn" id="8_suw2a"]
+[ext_resource type="PackedScene" uid="uid://dkw27llxh1d4w" path="res://models/grass-small.glb" id="11_21d5e"]
 
 [sub_resource type="Curve3D" id="Curve3D_yphds"]
 _data = {
@@ -31,6 +32,12 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_44kes"]
+top_radius = 8.0
+bottom_radius = 7.0
+radial_segments = 16
+rings = 2
 
 [node name="World" type="Node3D"]
 
@@ -97,6 +104,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99067, 2.87491, -7.89445)
 [node name="flag" parent="." instance=ExtResource("5_ai5l6")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.072, 1.48774, 18.377)
 
+[node name="flag2" parent="." instance=ExtResource("5_ai5l6")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 22.0688, 2.08117, 18.377)
+
 [node name="platform-grass-large-round2" parent="." instance=ExtResource("4_g42pe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.072, 1, 18.377)
 
@@ -133,3 +143,10 @@ speed = 5.0
 easingToPoints = true
 
 [node name="platform" parent="move_stop_track/object_move_and_stop" instance=ExtResource("1_hd6tc")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.02, 1, 17.782)
+mesh = SubResource("CylinderMesh_44kes")
+
+[node name="grass-small" parent="." instance=ExtResource("11_21d5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4199, 2.01915, 17.5006)
