@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch4octvkamohp"]
+
+[ext_resource type="Script" path="res://scripts/object_move_and_ferry.gd" id="1_4ijea"]
+
+[node name="object_move_and_ferry" type="PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.75, -0.25)
+rotation_mode = 0
+loop = false
+tilt_enabled = false
+script = ExtResource("1_4ijea")
