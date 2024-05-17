@@ -1,0 +1,6 @@
+res://scenes/main.tscn
+res://scenes/main-environment.tres
+res://scenes/world_1_1.tscn
+res://scripts/object_move_and_ferry.gd
+res://objects/object_move_and_ferry.tscn
+res://objects/platform_grass_large_round.tscn

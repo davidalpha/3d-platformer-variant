@@ -2,17 +2,12 @@
 
 [ext_resource type="Environment" uid="uid://bqnqgflivjvue" path="res://scenes/main-environment.tres" id="1_ahusb"]
 [ext_resource type="PackedScene" uid="uid://dl2ed4gkybggf" path="res://objects/player.tscn" id="2_onms2"]
-[ext_resource type="PackedScene" uid="uid://dy5xgvjdk1gt2" path="res://world_1_1.tscn" id="4_uwsql"]
+[ext_resource type="PackedScene" uid="uid://dy5xgvjdk1gt2" path="res://scenes/world_1_1.tscn" id="4_uwsql"]
 [ext_resource type="Script" path="res://scripts/view.gd" id="5_bg0fr"]
+[ext_resource type="LabelSettings" uid="uid://ik8rt21emwc1" path="res://resources/label.tres" id="7_pxmpb"]
+[ext_resource type="Script" path="res://scripts/ui_timer.gd" id="8_8s35t"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="11_apvpm"]
 [ext_resource type="Texture2D" uid="uid://cd7oyc56ehkx1" path="res://sprites/coin.png" id="13_jfda3"]
-[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="17_tk810"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_38ys3"]
-font = ExtResource("17_tk810")
-font_size = 48
-shadow_color = Color(0, 0, 0, 0.376471)
-shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node3D"]
 
@@ -20,6 +15,7 @@ shadow_offset = Vector2(2, 2)
 environment = ExtResource("1_ahusb")
 
 [node name="Player" parent="." node_paths=PackedStringArray("view") instance=ExtResource("2_onms2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680078, 4.29119, 8.53639)
 view = NodePath("../View")
 
 [node name="View" type="Node3D" parent="." node_paths=PackedStringArray("target")]
@@ -56,14 +52,22 @@ offset_top = 64.0
 offset_right = 144.0
 offset_bottom = 123.0
 text = "×"
-label_settings = SubResource("LabelSettings_38ys3")
+label_settings = ExtResource("7_pxmpb")
 
 [node name="Coins" type="Label" parent="HUD"]
 offset_left = 144.0
 offset_top = 64.0
-offset_right = 368.0
-offset_bottom = 123.0
+offset_right = 320.0
+offset_bottom = 128.0
 text = "0"
-label_settings = SubResource("LabelSettings_38ys3")
+label_settings = ExtResource("7_pxmpb")
+
+[node name="Timer" type="Label" parent="HUD"]
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 576.0
+offset_bottom = 128.0
+label_settings = ExtResource("7_pxmpb")
+script = ExtResource("8_8s35t")
 
 [connection signal="coin_collected" from="Player" to="HUD" method="_on_coin_collected"]
