@@ -18,6 +18,7 @@ var zoom = 10
 
 func _ready():
 	
+	add_to_group("views")
 	camera_rotation = rotation_degrees # Initial rotation
 	
 	pass

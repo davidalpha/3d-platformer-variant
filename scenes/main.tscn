@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqqgyqafm7xwp"]
+[gd_scene load_steps=10 format=3 uid="uid://bqqgyqafm7xwp"]
 
 [ext_resource type="Environment" uid="uid://bqnqgflivjvue" path="res://scenes/main-environment.tres" id="1_ahusb"]
 [ext_resource type="PackedScene" uid="uid://dl2ed4gkybggf" path="res://objects/player.tscn" id="2_onms2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/view.gd" id="5_bg0fr"]
 [ext_resource type="LabelSettings" uid="uid://ik8rt21emwc1" path="res://resources/label.tres" id="7_pxmpb"]
 [ext_resource type="Script" path="res://scripts/ui_timer.gd" id="8_8s35t"]
+[ext_resource type="PackedScene" uid="uid://bxsdjb72fv1f0" path="res://scenes/seagull.tscn" id="9_tgk2h"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="11_apvpm"]
 [ext_resource type="Texture2D" uid="uid://cd7oyc56ehkx1" path="res://sprites/coin.png" id="13_jfda3"]
 
@@ -16,15 +17,14 @@ environment = ExtResource("1_ahusb")
 
 [node name="Player" parent="." node_paths=PackedStringArray("view") instance=ExtResource("2_onms2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.680078, 4.29119, 8.53639)
-view = NodePath("../View")
+view = NodePath("../seagull/birdeye_view")
 
-[node name="View" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 0, 0, 0)
+[node name="player_view" type="Node3D" parent="Player" node_paths=PackedStringArray("target")]
+transform = Transform3D(0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, -0.680078, -4.29119, -12.6348)
 script = ExtResource("5_bg0fr")
-target = NodePath("../Player")
+target = NodePath("..")
 
-[node name="Camera" type="Camera3D" parent="View"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+[node name="Camera" type="Camera3D" parent="Player/player_view"]
 current = true
 fov = 40.0
 
@@ -69,5 +69,17 @@ offset_right = 576.0
 offset_bottom = 128.0
 label_settings = ExtResource("7_pxmpb")
 script = ExtResource("8_8s35t")
+
+[node name="seagull" parent="." instance=ExtResource("9_tgk2h")]
+scale_factor = 0.5
+
+[node name="birdeye_view" type="Node3D" parent="seagull" node_paths=PackedStringArray("target")]
+transform = Transform3D(0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 0, 0, -4.09838)
+script = ExtResource("5_bg0fr")
+target = NodePath("..")
+
+[node name="Camera" type="Camera3D" parent="seagull/birdeye_view"]
+current = true
+fov = 40.0
 
 [connection signal="coin_collected" from="Player" to="HUD" method="_on_coin_collected"]
