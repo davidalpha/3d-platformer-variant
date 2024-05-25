@@ -20,16 +20,17 @@ func _ready():
 	
 	add_to_group("views")
 	camera_rotation = rotation_degrees # Initial rotation
-	
-	pass
 
 func _physics_process(delta):
 	
 	# Set position and rotation to targets
 	
 	self.position = self.position.lerp(target.position, delta * 4)
-	rotation_degrees = rotation_degrees.lerp(camera_rotation, delta * 6)
+
+	var rotation_degrees_camera = rotation_degrees.lerp(camera_rotation, delta * 6)
 	
+	rotation_degrees = rotation_degrees_camera
+	print(rotation_degrees, target.rotation_degrees)
 	camera.position = camera.position.lerp(Vector3(0, 0, zoom), 8 * delta)
 	
 	handle_input(delta)
@@ -46,8 +47,8 @@ func handle_input(delta):
 	input.x = Input.get_axis("camera_up", "camera_down")
 	
 	camera_rotation += input.limit_length(1.0) * rotation_speed * delta
+	camera_rotation = camera_rotation.lerp(Vector3(clamp(camera_rotation.x, -80, -20), (target.rotation_degrees.y), camera_rotation.z), delta)
 	camera_rotation.x = clamp(camera_rotation.x, -80, -10)
-	
 	# Zooming
 	
 	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta

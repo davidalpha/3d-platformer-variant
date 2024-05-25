@@ -28,7 +28,6 @@ var frame_threshold = 300 #5 seconds
 func _ready():
 	$AnimationPlayer.play("flying")
 	$AnimationPlayer.speed_scale = 1.5
-	add_to_group("gulls")
 	
 func _physics_process(delta):
 	

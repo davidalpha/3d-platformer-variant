@@ -47,11 +47,10 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	# Rotation
-	
 	if Vector2(velocity.z, velocity.x).length() > 0:
 		rotation_direction = Vector2(velocity.z, velocity.x).angle()
-		
-	rotation.y = lerp_angle(rotation.y, rotation_direction, delta * 10)
+		transform.basis = transform.basis.from_euler(Vector3(0,rotation_direction,0))
+
 	
 	# Falling/respawning
 	
@@ -96,8 +95,9 @@ func handle_controls(delta):
 	var input := Vector3.ZERO
 	
 	input.x = Input.get_axis("move_left", "move_right")
+
 	input.z = Input.get_axis("move_forward", "move_back")
-	
+
 	input = input.rotated(Vector3.UP, view.rotation.y).normalized()
 	
 	movement_velocity = input * movement_speed * delta

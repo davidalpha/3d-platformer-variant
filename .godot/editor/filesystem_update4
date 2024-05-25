@@ -14,4 +14,6 @@ res://objects/object_move_and_ferry.tscn
 res://objects/platform_grass_large_round.tscn
 res://objects/platform.tscn
 res://scenes/seagull.tscn
+res://objects/player.tscn
 res://scripts/view.gd
+res://scripts/player.gd
